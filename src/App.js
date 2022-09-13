@@ -58,7 +58,7 @@ function App() {
     console.log(genre.target.value);
     setSelectedGenre(genre.target.value)
 
-    axios(`https://api.spotify.com/v1/browse/categories/${genre.target.value}/playlists?limit=10`, {
+    axios(`https://api.spotify.com/v1/browse/categories/${genre.target.value}/playlists?limit=20`, {
       method: 'GET',
       headers: { 'Authorization' : 'Bearer ' + token}
     })
@@ -74,7 +74,7 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios(`https://api.spotify.com/v1/playlists/${selectedPlaylist}/tracks?limit=10`, {
+    axios(`https://api.spotify.com/v1/playlists/${selectedPlaylist}/tracks?limit=40`, {
       method: 'GET',
       headers: {
         'Authorization' : 'Bearer ' + token
