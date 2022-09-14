@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getAuthToken, getGenres, getPlaylists, getPlaylistData } from '../services/spotify'
 import DropDown from '../components/dropdown';
-import TrackList from '../components/trackList';
+import playlistList from '../components/playlistList';
 
 
 function PlaylistPage() {
-    
+
     const [token, setToken] = useState('');
   
     const [selectedGenre, setSelectedGenre] = useState('')
@@ -50,14 +50,10 @@ function PlaylistPage() {
                     options={listOfGenres}
                     raiseChange={onGenreChange}
                     />
-                    <DropDown
-                    options={listOfPlaylists}
-                    raiseChange={onPlaylistChange}
-                    />
                     <button type='submit'>Search</button>
 
-                    <TrackList 
-                    data={listOfTracks}
+                    <playlistList 
+                        data={listOfPlaylists}
                     />
                 </div>
             </form>
