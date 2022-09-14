@@ -38,8 +38,6 @@ function App() {
         headers: { 'Authorization' : 'Bearer ' + tokenResponse.data.access_token}
       })
       .then (genreResponse => {      
-        console.log('genre response: ', genreResponse);  
-        setSelectedGenre(selectedGenre)
         setListOfGenres(genreResponse.data.categories.items)
       });
       
