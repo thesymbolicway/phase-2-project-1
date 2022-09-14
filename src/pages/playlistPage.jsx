@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuthToken, getGenres, getPlaylists, getPlaylistData } from '../services/spotify'
 import DropDown from '../components/dropdown';
-import playlistList from '../components/playlistList';
+import PlayListDetail from '../components/playlistList';
 
 
 function PlaylistPage() {
@@ -52,7 +52,7 @@ function PlaylistPage() {
                     />
                     <button type='submit'>Search</button>
 
-                    <playlistList 
+                    <PlayListDetail 
                         data={listOfPlaylists}
                     />
                 </div>

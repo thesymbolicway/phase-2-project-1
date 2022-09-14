@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-function TrackList({data}) {
+function PlayListDetail({data}) {
     let navigate = useNavigate();
 
     function handleClick(playlistId) {
@@ -15,4 +15,4 @@ function TrackList({data}) {
     );
 }
 
-export default TrackList;
+export default PlayListDetail;
