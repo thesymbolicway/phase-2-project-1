@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import axios from 'axios';
+import PlaylistPage from './pages/playlistPage';
+import PlaylistDetailPage from './pages/playlistDetailPage';
+import PersonalPlaylistPage from './pages/personalPlaylistPage'
+import PersonalPlaylistDetailPage from './pages/personalPlaylistDetailPage';
+
 import DropDown from './components/dropdown';
-import { clientId, clientSecret, getSpotifyAPIToken, getSpotifyCategoriesAPI } from './env/spotify'
 import TrackList from './components/trackList';
+import { getAuthToken, getGenres, getPlaylists, getPlaylistData } from './services/spotify'
 
 
 function App() {
@@ -21,82 +26,36 @@ function App() {
   
 
   useEffect(() => {
-
-    axios('https://accounts.spotify.com/api/token', {
-      headers: {
-        'Content-Type' : 'application/x-www-form-urlencoded',
-        'Authorization' : 'Basic ' + btoa(clientId + ':' + clientSecret)      
-      },
-      data: 'grant_type=client_credentials',
-      method: 'POST'
+    getAuthToken().then(token => {
+      setToken(token)
+      getGenres(token).then(setListOfGenres)
     })
-    .then(tokenResponse => {      
-      setToken(tokenResponse.data.access_token);
-
-      axios('https://api.spotify.com/v1/browse/categories?locale=sv_US', {
-        method: 'GET',
-        headers: { 'Authorization' : 'Bearer ' + tokenResponse.data.access_token}
-      })
-      .then (genreResponse => {      
-        setListOfGenres(genreResponse.data.categories.items)
-      });
-      
-    });
-
   }, []);
 
 
   function onGenreChange(genre) {
-    console.log(genre.target.value);
-    setSelectedGenre(genre.target.value)
-
-    axios(`https://api.spotify.com/v1/browse/categories/${genre.target.value}/playlists?limit=20`, {
-      method: 'GET',
-      headers: { 'Authorization' : 'Bearer ' + token}
-    })
-    .then(response => {
-      setListOfPlaylists(response.data.playlists.items)
-    })
+    setSelectedGenre(genre)
+    getPlaylists(genre, token).then(setListOfPlaylists)
   }
 
   function onPlaylistChange(playlist) {
-    setSelectedPlaylist(playlist.target.value)
+    setSelectedPlaylist(playlist)
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    axios(`https://api.spotify.com/v1/playlists/${selectedPlaylist}/tracks?limit=40`, {
-      method: 'GET',
-      headers: {
-        'Authorization' : 'Bearer ' + token
-      }
-    })
-    .then(response => {
-      console.log('songs', response.data);
-      setListOfTracks(response.data.items)
-    });
+    getPlaylistData(selectedPlaylist, token).then(setListOfTracks)
   }
 
+  
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="App">
-        <h1>Hello</h1>
-        <DropDown
-          options={listOfGenres}
-          raiseChange={onGenreChange}
-        />
-        <DropDown
-          options={listOfPlaylists}
-          raiseChange={onPlaylistChange}
-        />
-        <button type='submit'>Search</button>
+    <Routes>
+      <Route path='/' element={<PlaylistPage />} />
+      <Route path='/:playlistId' element={<PlaylistDetailPage />} />
+      <Route path='/me' element={<PersonalPlaylistPage />} />
+      <Route path='/me/:id' element={<PersonalPlaylistDetailPage />} />
+    </Routes>
 
-        <TrackList 
-          data={listOfTracks}
-        />
-      </div>
-    </form>
   );
 }
 
