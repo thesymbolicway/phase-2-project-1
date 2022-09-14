@@ -1,8 +1,8 @@
 import React from 'react';
 
-function DropDown({options, raiseChange}) {
+function DropDown({options, raiseChange, value}) {
     return (
-        <select onChange={e => raiseChange(e.target.value)}>
+        <select value={value} onChange={e => raiseChange(e.target.value)}>
             {options.map((option, i) => <option key={i} value={option.id}>{option.name}</option>)}
         </select>
     );

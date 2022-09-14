@@ -4,23 +4,17 @@ import DropDown from '../components/dropdown';
 import PlayListDetail from '../components/playlistList';
 
 
-function PlaylistPage() {
+function PlaylistPage({selectedGenre, setSelectedGenre}) {
 
     const [token, setToken] = useState('');
-  
-    const [selectedGenre, setSelectedGenre] = useState('')
     const [listOfGenres, setListOfGenres] = useState([])
-    
-    const [selectedPlaylist, setSelectedPlaylist] = useState('')
     const [listOfPlaylists, setListOfPlaylists] = useState([])
-  
-    const [selectedTrack, setSelectedTrack] = useState('')
-    const [listOfTracks, setListOfTracks] = useState([])
 
     useEffect(() => {
         getAuthToken().then(token => {
             setToken(token)
             getGenres(token).then(setListOfGenres)
+            getPlaylists(selectedGenre, token).then(setListOfPlaylists)
         })
     }, []);
 
@@ -30,27 +24,18 @@ function PlaylistPage() {
         getPlaylists(genre, token).then(setListOfPlaylists)
     }
 
-    function onPlaylistChange(playlist) {
-        setSelectedPlaylist(playlist)
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        getPlaylistData(selectedPlaylist, token).then(setListOfTracks)
-    }
 
     return (
         <div>
             <h1>Playlist Page</h1>
             
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div className="App">
-                    <h1>Hello</h1>
                     <DropDown
                     options={listOfGenres}
                     raiseChange={onGenreChange}
+                    value={selectedGenre}
                     />
-                    <button type='submit'>Search</button>
 
                     <PlayListDetail 
                         data={listOfPlaylists}

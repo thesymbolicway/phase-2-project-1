@@ -16,7 +16,7 @@ function PlaylistDetailPage() {
     
     console.log(tracks);
     return (
-        <div>
+        <div className='container'>
             <h1>Playlist Detail Page</h1>
             <TrackListDetails
                 data={tracks}
