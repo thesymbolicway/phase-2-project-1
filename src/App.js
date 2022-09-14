@@ -19,12 +19,6 @@ function App() {
   const [selectedTrack, setSelectedTrack] = useState('')
   const [listOfTracks, setListOfTracks] = useState([])
   
-  const data = [
-    {value: 1, name: 'A'},
-    {value: 2, name: 'B'},
-    {value: 3, name: 'C'},
-    {value: 4, name: 'D'}
-  ]
 
   useEffect(() => {
 
