@@ -1,13 +1,11 @@
 function TrackListDetails({data}) {
     console.log(data);
     return (
-        <div>
-            <ul>
+        <>
                 {
-                    data.map(track => <li>{track.track.name}</li>)
+                    data.map(track => <div className="card">{track.track.name}</div>)
                 }
-            </ul>
-        </div>
+        </>
     );
 }
 

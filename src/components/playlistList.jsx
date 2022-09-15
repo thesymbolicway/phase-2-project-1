@@ -9,9 +9,12 @@ function PlayListDetail({data}) {
     }
 
     return (
-        <ul>
-            {data.map(playlist => <li key={playlist.id} onClick={() => handleClick(playlist.id)} >{playlist.name}</li>)}
-        </ul>
+        < >
+            {data.map(playlist => 
+            <div className='card'>
+                <h2 key={playlist.id} onClick={() => handleClick(playlist.id)} >{playlist.name}</h2>
+            </div>)}
+        </>
     );
 }
 
