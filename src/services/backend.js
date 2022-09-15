@@ -26,9 +26,25 @@ async function deletePlaylist(id) {
     return request
 }
 
-async function updatePlaylist(id, playlist) {
-    const request = await axios.patch(`${userPlaylistAPI}/${id}`, playlist)
+async function updatePlaylist(id, data) {
+    const request = await axios.patch(`${userPlaylistAPI}/${id}`, data)
     return request
+}
+
+async function addTrackToPlaylist(playlistId, data) {
+    const playlist = await getPlaylist(playlistId)
+    const newTrackList = [...playlist.tracks, data]
+    const request = await axios.patch(`${userPlaylistAPI}/${playlistId}`, {tracks: newTrackList})
+    return request
+}
+
+async function removeTrackfromPlaylist(playlistId, trackId) {
+    const playlist = await getPlaylist(playlistId)
+    
+    const newTrackList = playlist.tracks.filter(track => track !== trackId)
+    
+    const request = await axios.patch(`${userPlaylistAPI}/${playlistId}`, {tracks: newTrackList})
+    return request.data
 }
 
 
@@ -38,5 +54,7 @@ export {
     getPlaylists, 
     getPlaylist,
     deletePlaylist, 
-    updatePlaylist
+    updatePlaylist,
+    addTrackToPlaylist,
+    removeTrackfromPlaylist
 }

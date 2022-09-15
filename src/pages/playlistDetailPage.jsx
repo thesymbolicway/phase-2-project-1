@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { getAuthToken, getPlaylistData } from '../services/spotify'
 import TrackListDetails from '../components/trackListDetails';
+import PlaylistHeader from '../components/playlistHeader';
 
 
 function PlaylistDetailPage() {
@@ -33,7 +34,15 @@ function PlaylistDetailPage() {
     
     return (
         <div className='container'>
-            <h1>{playlistData.name}</h1>
+            
+            <PlaylistHeader
+                title={playlistData.name}
+                description={playlistData.description}
+                thumbnail = {playlistData.image}
+                followers={playlistData.followers}
+                personalPlaylist={false}
+            />
+            
             <TrackListDetails
                 data={playlistData.tracks}
             />

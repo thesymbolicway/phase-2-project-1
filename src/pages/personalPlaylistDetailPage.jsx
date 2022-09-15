@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from "react-router-dom";
-import { getPlaylist, deletePlaylist, updatePlaylist } from '../services/backend';
+import { useParams } from "react-router-dom";
+import { getPlaylist, deletePlaylist, updatePlaylist, removeTrackfromPlaylist } from '../services/backend';
+import { getMultipleTracks } from '../services/spotify';
 import PlaylistForm from '../components/playlistForm';
+import PlaylistHeader from '../components/playlistHeader';
+import PersonalTrackListDetails from '../components/personalTrackList';
+
 
 function PersonalPlaylistDetailPage() {
     const { playlistId } = useParams();
-    const navigate = useNavigate();
 
     const [playlistData, setPlaylistData] = useState({})
+    const [playlistTracks, setPlaylistTracks] = useState([])
 
     useEffect(() => {
-        getPlaylist(playlistId).then(setPlaylistData)
+        getPlaylist(playlistId).then(res => {
+            setPlaylistData(res)
+            getMultipleTracks(res.tracks).then(setPlaylistTracks)
+        })
+
     }, [])
 
-    function onDelete() {
-        deletePlaylist(playlistId).then(navigate('/me'))
+    function onDeletePlaylist() {
+        deletePlaylist(playlistId).then(() => {window.location.href = "/me"})
     }
+
+    async function handleDeleteTrack(trackId) {
+        await removeTrackfromPlaylist(playlistId, trackId)
+        setPlaylistTracks(tracks => tracks.filter(track => track.id !== trackId))
+    }
+
+    console.log(playlistTracks);
 
     function handleUpdate(e) {
         e.preventDefault()
@@ -34,11 +49,23 @@ function PersonalPlaylistDetailPage() {
 
     return (
         <div className='container'>
-            <h1>{playlistData.name}</h1>
-            <p>{playlistData.description}</p>
-            <button onClick={onDelete} className='btn btn-danger'>Delete</button>
-            <PlaylistForm
-            raiseSubmit={handleUpdate}
+            <PlaylistHeader
+                title={playlistData.name}
+                description={playlistData.description}
+                thumbnail = {playlistData.image}
+                followers={playlistData.followers}
+                personalPlaylist={true}
+            />
+
+            <button onClick={onDeletePlaylist} className='btn btn-danger'>Delete</button>
+            
+            {/* <PlaylistForm
+                raiseSubmit={handleUpdate}
+            /> */}
+
+            <PersonalTrackListDetails
+                data={playlistTracks}
+                onDeleteTrack={handleDeleteTrack}
             />
 
         </div>

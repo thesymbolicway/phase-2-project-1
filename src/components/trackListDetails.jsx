@@ -1,8 +1,20 @@
-import { Table } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import Table from 'react-bootstrap/Table';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
+import { getPlaylists, addTrackToPlaylist } from '../services/backend';
 
 function TrackListDetails({data}) {
-    // track title, artist, album, duration, is favorited 
 
+    const [userPlaylists, setUserPlaylists] = useState([])
+
+    useEffect(() => {
+        getPlaylists().then(setUserPlaylists)
+    }, [])
+    
+    console.log(userPlaylists);
+    
     function renderArtist(artistArr) {
         if(artistArr.length === 1) {
             return artistArr[0].name
@@ -10,7 +22,6 @@ function TrackListDetails({data}) {
         if(artistArr.length === 0) {
             return 'Unkown Artist'
         }
-        
         // let returnValue = []; 
         // for(let i = 0; i <= artistArr.length; i++) {
         //     returnValue.push(artistArr[i].name)
@@ -19,7 +30,6 @@ function TrackListDetails({data}) {
         // console.log(returnValue);
         
         return artistArr[0].name
-
     }
 
     function renderDuration(duration) {
@@ -28,6 +38,20 @@ function TrackListDetails({data}) {
 
     function renderAlbum(album) {
         return album
+    }
+
+    function onAddToPlaylist(playlistId, trackId) {
+        addTrackToPlaylist(playlistId, trackId)
+    }
+
+    function renderDropdown(trackId) {
+        return (
+            <DropdownButton onSelect={playlistId => onAddToPlaylist(playlistId, trackId)} id="addToPlaylist" title="Add me to a playlist">
+                {
+                    userPlaylists.map(playlist => <Dropdown.Item eventKey={playlist.id} >{playlist.name}</Dropdown.Item>)
+                }
+            </DropdownButton>
+        )
     }
 
     return (
@@ -45,13 +69,14 @@ function TrackListDetails({data}) {
                 <tbody>
                     {
                         data.map(track => {
+                            console.log(track.track);
                             return (
                             <tr>
                                 <td>{track.track.name}</td>
                                 <td>{renderArtist(track.track.artists)}</td>
                                 <td>{renderAlbum(track.track.album.name)}</td>
                                 <td>{renderDuration(track.track.duration_ms)}</td>
-                                <td><button className='btn btn-primary'>like</button></td>
+                                <td>{renderDropdown(track.track.id)}</td>
                             </tr>
                             )
                         })
@@ -59,11 +84,6 @@ function TrackListDetails({data}) {
                 </tbody>
             </Table>
         </div>
-        // <>
-        //         {
-        //             data.map(track => <div className="card">{track.track.name}</div>)
-        //         }
-        // </>
     );
 }
 

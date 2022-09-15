@@ -5,8 +5,8 @@ import {
     clientId, 
     clientSecret, 
     getSpotifyPlaylists,
-    getSpotifyTracksInPlaylist,
-    getSpotifyPlaylistData
+    getSpotifyPlaylistData,
+    getMultipleSpotifyTracks
 } from '../env/spotify'
 
 
@@ -50,4 +50,21 @@ async function getPlaylistData(playlistId, token) {
     return request.data;
 }
 
-export {getAuthToken, getGenres, getPlaylists, getPlaylistData}
+
+async function getMultipleTracks(trackArr) {
+    const token = await getAuthToken()
+    const request = await axios(getMultipleSpotifyTracks(trackArr), {
+        method: 'GET',
+        headers: { 'Authorization' : 'Bearer ' + token}
+        
+    })
+    return request.data.tracks
+}
+
+export {
+    getAuthToken, 
+    getGenres, 
+    getPlaylists,
+    getPlaylistData,
+    getMultipleTracks
+}

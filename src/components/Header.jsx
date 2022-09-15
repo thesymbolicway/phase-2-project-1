@@ -8,8 +8,8 @@ function Header() {
       <section className="header-top">
         <section className="header-top__logo">
         
-        <img src={"https://danielarisa.com/wp-content/uploads/2022/09/Screen-Shot-2022-09-14-at-5.38.00-PM.png"} alt={"Project 2"}/>
-        {/* <a href="/" className="header-logo">DOMify</a> */}
+        {/* <img src={"https://danielarisa.com/wp-content/uploads/2022/09/Screen-Shot-2022-09-14-at-5.38.00-PM.png"} alt={"Project 2"}/> */}
+        <a href="/" className="header-logo">DOMify</a>
         </section>
         <section className="header-top__navbar">
           <section className="header-top__navigation">

@@ -11,8 +11,6 @@ function PersonalPlaylistPage() {
         getUserData().then(setUserData)
         getPlaylists().then(setUserPlaylists)
     }, [])
-    
-    console.log(userPlaylists);
 
     function handleSubmit(e) {
         e.preventDefault()
