@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import PlaylistCard from './playlistCard';
 
 function PlayListDetail({data}) {
     let navigate = useNavigate();
@@ -9,9 +10,9 @@ function PlayListDetail({data}) {
     }
 
     return (
-        <ul>
-            {data.map(playlist => <li key={playlist.id} onClick={() => handleClick(playlist.id)} >{playlist.name}</li>)}
-        </ul>
+        < >
+            {data.map(playlist => <PlaylistCard playlist={playlist} raiseClick={handleClick}/>)}
+        </>
     );
 }
 

@@ -4,7 +4,22 @@ function TrackListDetails({data}) {
     // track title, artist, album, duration, is favorited 
 
     function renderArtist(artistArr) {
+        if(artistArr.length === 1) {
+            return artistArr[0].name
+        }
+        if(artistArr.length === 0) {
+            return 'Unkown Artist'
+        }
+        
+        // let returnValue = []; 
+        // for(let i = 0; i <= artistArr.length; i++) {
+        //     returnValue.push(artistArr[i].name)
+        // }
+
+        // console.log(returnValue);
+        
         return artistArr[0].name
+
     }
 
     function renderDuration(duration) {
@@ -44,6 +59,11 @@ function TrackListDetails({data}) {
                 </tbody>
             </Table>
         </div>
+        // <>
+        //         {
+        //             data.map(track => <div className="card">{track.track.name}</div>)
+        //         }
+        // </>
     );
 }
 

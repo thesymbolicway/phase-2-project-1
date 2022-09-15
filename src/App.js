@@ -29,7 +29,7 @@ function App() {
         } />
         <Route path='/:playlistId' element={<PlaylistDetailPage />} />
         <Route path='/me' element={<PersonalPlaylistPage />} />
-        <Route path='/me/:id' element={<PersonalPlaylistDetailPage />} />
+        <Route path='/me/:playlistId' element={<PersonalPlaylistDetailPage />} />
       </Routes>
     </>
   );

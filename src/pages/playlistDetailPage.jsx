@@ -8,14 +8,17 @@ function PlaylistDetailPage() {
     const { playlistId } = useParams();
 
     const [playlistData, setPlaylistData] = useState({
-        name: "", image: "", description: "", followers: 0, tracks: []
+        name: "", 
+        image: "", 
+        description: "", 
+        followers: 0, 
+        tracks: []
     })
 
 
     useEffect(() => {
         getAuthToken().then(token => {
             getPlaylistData(playlistId, token).then(response => {
-                console.log('response data', response);
                 setPlaylistData({
                     name: response.name,
                     image: response.images[0].url,

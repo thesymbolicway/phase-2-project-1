@@ -36,11 +36,10 @@ function PlaylistPage({selectedGenre, setSelectedGenre}) {
                     raiseChange={onGenreChange}
                     value={selectedGenre}
                     />
-
-                    <PlayListDetail 
-                        data={listOfPlaylists}
-                    />
                 </div>
+                <>
+                    <PlayListDetail data={listOfPlaylists} />
+                </>
             </form>
         </div>
     );
