@@ -29,8 +29,6 @@ function PersonalPlaylistPage() {
 
     }
 
-
-
     return (
         <div className="container">
             <PlaylistForm
@@ -42,9 +40,8 @@ function PersonalPlaylistPage() {
             {
                 userPlaylists.map(playlist => <PersonalPlaylistCard data={playlist} key={playlist.id}/>)
             }
-
         </div>
-    );
+    )
 }
 
 export default PersonalPlaylistPage;

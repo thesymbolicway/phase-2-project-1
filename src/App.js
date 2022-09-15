@@ -7,6 +7,7 @@ import PlaylistPage from './pages/playlistPage';
 import PlaylistDetailPage from './pages/playlistDetailPage';
 import PersonalPlaylistPage from './pages/personalPlaylistPage'
 import PersonalPlaylistDetailPage from './pages/personalPlaylistDetailPage';
+import Header from './components/Header'
 
 
 function App() {
@@ -16,10 +17,11 @@ function App() {
   return (
     <>
       <nav>
-        <p className='mr-10'>test navbar</p>
+        {/* <p className='mr-10'>test navbar</p>
         <button className='mr-10' onClick={() => navigate('me')}>Me</button>
-        <button onClick={() => navigate('/')}>Explore</button>
+        <button onClick={() => navigate('/')}>Explore</button> */}
       </nav>
+      <Header />
       <Routes>
         <Route path='/' element={
           <PlaylistPage 
