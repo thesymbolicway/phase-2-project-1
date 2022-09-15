@@ -5,7 +5,8 @@ import {
     clientId, 
     clientSecret, 
     getSpotifyPlaylists,
-    getSpotifyTracksInPlaylist
+    getSpotifyTracksInPlaylist,
+    getSpotifyPlaylistData
 } from '../env/spotify'
 
 
@@ -41,12 +42,12 @@ async function getPlaylists(genreId, token) {
 }
 
 async function getPlaylistData(playlistId, token) {
-    const request = await axios(getSpotifyTracksInPlaylist(playlistId), {
+    const request = await axios(getSpotifyPlaylistData(playlistId), {
         method: 'GET',
         headers: { 'Authorization' : 'Bearer ' + token}
     })
 
-    return request.data.items;
+    return request.data;
 }
 
 export {getAuthToken, getGenres, getPlaylists, getPlaylistData}

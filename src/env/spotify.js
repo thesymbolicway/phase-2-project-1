@@ -5,6 +5,7 @@ const getSpotifyAPIToken = 'https://accounts.spotify.com/api/token'
 const getSpotifyGenres = 'https://api.spotify.com/v1/browse/categories?locale=sv_US'
 const getSpotifyPlaylists = genreId => `https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=20`
 const getSpotifyTracksInPlaylist = playlistId => `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=40`
+const getSpotifyPlaylistData = playlistId => `	https://api.spotify.com/v1/playlists/${playlistId}`
 
 
 export {
@@ -13,5 +14,6 @@ export {
     getSpotifyAPIToken, 
     getSpotifyGenres,
     getSpotifyPlaylists,
-    getSpotifyTracksInPlaylist
+    getSpotifyTracksInPlaylist,
+    getSpotifyPlaylistData
 }

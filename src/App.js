@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import './styles/App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import PlaylistPage from './pages/playlistPage';
 import PlaylistDetailPage from './pages/playlistDetailPage';
 import PersonalPlaylistPage from './pages/personalPlaylistPage'
