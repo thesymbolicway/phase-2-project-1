@@ -74,3 +74,240 @@ nav {
 .mr-10 {
   margin-right: 10px;
 }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.header {
+  margin-top: 70px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.header-top {
+  display: flex;
+  width: 100%;
+  height: 80px;
+}
+
+.header-top__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.header-logo {
+  color: inherit;
+  text-decoration: inherit;
+  font-family: RobotoThin;
+  font-size: 100px;
+}
+
+.header-top__navbar {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.header-top__seperator {
+  width: 100%;
+  border: none;
+  height: 2px;
+  margin-top: 2px;
+  background-color: black;
+}
+
+.header-top__navigation {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 55px;
+}
+
+.header-bottom {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.header-bottom__email {
+  margin-right: 55px;
+}
+
+.header-bottom__phone {
+  margin-right: 65px;
+}
+
+.header-bottom__bag {
+  position: absolute;
+  display: flex;
+}
+
+.header-bottom__bag-icon {
+  position: relative;
+  display: flex;
+  left: -5px;
+  width: 30px;
+  height: 30px; 
+}
+
+.header-bottom__bag-count {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: RobotoRegular;
+  right: 0px;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 10px;
+  color: white;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+  color: inherit;
+  text-decoration: inherit;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.card {
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 15rem;
+  height: 25rem;
+  display: inline-grid;
+  margin: 1rem 2rem;
+  box-shadow: 3px 4px #E04B52
+}
+body {
+  background: #76b852;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  width: 360px;
+  background-color: white;
+  margin: auto;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 10px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.success-message {
+  font-family: "Roboto", sans-serif;
+  background-color: #3f89f8;
+  padding: 15px;
+  color: white;
+}
+
+.form-field {
+  margin: 10px 0 10px 0;
+  padding: 15px;
+  font-size: 16px;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+span {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: red;
+  margin-bottom: 15px;
+}
+
+input {
+  background: #f2f2f2;
+}
+
+.error {
+  border-style: solid;
+  border: 2px solid #ffa4a4;
+}
+
+button {
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
