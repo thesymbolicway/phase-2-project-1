@@ -33,7 +33,9 @@ function TrackListDetails({data}) {
     }
 
     function renderDuration(duration) {
-        return duration
+        var minutes = Math.floor(duration / 60000);
+        var seconds = ((duration % 6000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds
     }
 
     function renderAlbum(album) {
