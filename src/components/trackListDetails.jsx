@@ -6,13 +6,12 @@ import Button from 'react-bootstrap/Button';
 import { getPlaylists, addTrackToPlaylist } from '../services/backend';
 
 function TrackListDetails({data, personalPlaylist, onDeleteTrack}) {
-
     const [userPlaylists, setUserPlaylists] = useState([])
 
     useEffect(() => {
         getPlaylists().then(setUserPlaylists)
     }, [])
-
+    
     function renderTitle(data) {
         if(personalPlaylist) {
             return data.name
@@ -22,8 +21,7 @@ function TrackListDetails({data, personalPlaylist, onDeleteTrack}) {
             return data.track.name
         }
     }
-    
-    
+
     function renderArtist(data) {
         if(personalPlaylist) {
             console.log(data.artists[0].name);
@@ -32,7 +30,7 @@ function TrackListDetails({data, personalPlaylist, onDeleteTrack}) {
             return (data.track.artists[0].name);
         }
     }
-
+    
     function renderDuration(data) {
         let duration;
         if(personalPlaylist) {
@@ -40,11 +38,12 @@ function TrackListDetails({data, personalPlaylist, onDeleteTrack}) {
         } else {
             duration = data.track.duration_ms;
         }
-
+    
         const minutes = Math.floor(duration / 60000);
         const seconds = ((duration % 60000) / 1000).toFixed(0);
+    
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds
-    }
+    }    
 
     function renderAlbum(data) {
         if(personalPlaylist) {

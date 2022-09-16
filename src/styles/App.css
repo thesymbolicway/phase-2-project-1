@@ -12,11 +12,28 @@ code {
     monospace;
 }
 
+<<<<<<< HEAD
+=======
+
+
+/* .card {
+  justify-content: center;
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 15rem;
+  height: 3rem;
+  display:inline-table;
+  margin: 1rem 1rem;
+  box-shadow: 3px 4px #e04b52
+} */
+
+>>>>>>> b5b0ae588258b48b9ebe9ea78e5d4a9625c412e8
 nav {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  /* flex-direction: row; */
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 
 .mr-10 {
@@ -118,8 +135,8 @@ nav {
 .header-top__navigation {
   display: flex;
   flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
+  /* flex-direction: row; */
+  /* justify-content: flex-end; */
   margin-right: 55px;
 }
 
@@ -148,6 +165,7 @@ nav {
 
 .card {
   text-align: center;
+  align-items: center;
   border: grey solid 1px;
   padding: 1rem;
   width: 15rem;
