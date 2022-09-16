@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PlaylistForm from "../components/playlistForm";
-import PersonalPlaylistCard from '../components/personalPlaylistCard';
+import ProfileHeader from '../components/profileHeader';
+import PlaylistFeed from '../components/playlistFeed';
 import { getUserData, createNewPlaylist, getPlaylists } from '../services/backend'
 
 function PersonalPlaylistPage() {
     const [userData, setUserData] = useState({})
     const [userPlaylists, setUserPlaylists] = useState([])
+    const [makingPlaylist, setMakingPlaylist] = useState(false)
 
     useEffect(() => {
         getUserData().then(setUserData)
@@ -15,10 +17,11 @@ function PersonalPlaylistPage() {
     function handleSubmit(e) {
         e.preventDefault()
 
+
         const newPlaylist = {
-            name: e.target.playlistName.value,
-            description: e.target.playlistDescription.value,
-            image: e.target.playlistImage.value,
+            name: e.target.name.value,
+            description: e.target.description.value,
+            image: e.target.image.value,
             followers: 0, 
             tracks: []
         }
@@ -27,17 +30,22 @@ function PersonalPlaylistPage() {
 
     }
 
+
     return (
-        <div className="container">
-            <PlaylistForm
-                raiseSubmit={handleSubmit}
+        <div>
+            <ProfileHeader 
+                data={userData}
+                playlistData={''}
+                onCreateNewPlaylist={handleSubmit}
             />
-
-            <h1 className='mx-10'>Welcome Back, {userData.name}!</h1>
-
+            
             {
-                userPlaylists.map(playlist => <PersonalPlaylistCard data={playlist} key={playlist.id}/>)
+                makingPlaylist ? <PlaylistForm raiseSubmit={handleSubmit} onDiscardPlaylist={() => setMakingPlaylist(false)} /> : null
             }
+            <PlaylistFeed 
+                data={userPlaylists}
+                personalPlaylist={true}
+            />
         </div>
     )
 }

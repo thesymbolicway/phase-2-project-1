@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function PlaylistForm({raiseSubmit}) {
+function PlaylistForm({raiseSubmit, onDiscardPlaylist}) {
     return (
         <div className='form-container'>
             <Form onSubmit={raiseSubmit}>
@@ -20,9 +20,16 @@ function PlaylistForm({raiseSubmit}) {
                     <Form.Control type="text" placeholder="Give me a photo!" />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Create New Playlist
-                </Button>
+                <div className='space-between'>
+                    <Button variant="primary" type="submit" size="sm">
+                        Create New Playlist
+                    </Button>
+
+                    <Button variant="danger" onClick={onDiscardPlaylist} size="sm">
+                        Discard Playlist
+                    </Button>
+                </div>
+
             </Form>
 
         </div>

@@ -33,12 +33,12 @@ function PlaylistDetailPage() {
     }, [])
     
     return (
-        <div className='container'>
+        <div>
             
             <PlaylistHeader
-                title={playlistData.name}
+                name={playlistData.name}
                 description={playlistData.description}
-                thumbnail = {playlistData.image}
+                image = {playlistData.image}
                 followers={playlistData.followers}
                 personalPlaylist={false}
             />

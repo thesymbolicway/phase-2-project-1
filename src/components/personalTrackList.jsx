@@ -24,7 +24,7 @@ function PersonalTrackListDetails({data, onDeleteTrack}) {
 
     function renderDeleteButton(trackId) {
         return (
-            <Button onClick={() => onDeleteTrack(trackId)} variant="danger">Delete</Button>
+            <Button onClick={() => onDeleteTrack(trackId)} size="sm" variant="secondary">Delete</Button>
         )
     }
     

@@ -13,20 +13,22 @@ function App() {
   const [selectedGenre, setSelectedGenre] = useState('')
 
   return (
-    <>
-      <Header />
-      <Routes>
-        <Route path='/' element={
-          <PlaylistPage 
-            selectedGenre={selectedGenre} 
-            setSelectedGenre={setSelectedGenre}
-          />
-        } />
-        <Route path='/:playlistId' element={<PlaylistDetailPage />} />
-        <Route path='/me' element={<PersonalPlaylistPage />} />
-        <Route path='/me/:playlistId' element={<PersonalPlaylistDetailPage />} />
-      </Routes>
-    </>
+    <div>
+        <Header />
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={
+              <PlaylistPage 
+                selectedGenre={selectedGenre} 
+                setSelectedGenre={setSelectedGenre}
+              />
+            } />
+            <Route path='/:playlistId' element={<PlaylistDetailPage />} />
+            <Route path='/me' element={<PersonalPlaylistPage />} />
+            <Route path='/me/:playlistId' element={<PersonalPlaylistDetailPage />} />
+          </Routes>
+        </div>
+    </div>
   );
 }
 
