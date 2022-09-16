@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getPlaylist, deletePlaylist, updatePlaylist, removeTrackfromPlaylist } from '../services/backend';
 import { getMultipleTracks } from '../services/spotify';
 import PlaylistHeader from '../components/playlistHeader';
-import PersonalTrackListDetails from '../components/personalTrackList';
+import TrackListDetails from '../components/trackListDetails';
 
 
 function PersonalPlaylistDetailPage() {
@@ -48,10 +48,13 @@ function PersonalPlaylistDetailPage() {
                 personalPlaylist={true}
             />
 
-            <PersonalTrackListDetails
+            <TrackListDetails 
                 data={playlistTracks}
                 onDeleteTrack={handleDeleteTrack}
+                personalPlaylist={true}
             />
+
+
 
         </div>
     );

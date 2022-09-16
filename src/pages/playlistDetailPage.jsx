@@ -26,7 +26,6 @@ function PlaylistDetailPage() {
                     description: response.description,
                     followers: response.followers.total,
                     tracks: response.tracks.items
-
                 })
             })
         })
@@ -36,15 +35,13 @@ function PlaylistDetailPage() {
         <div>
             
             <PlaylistHeader
-                name={playlistData.name}
-                description={playlistData.description}
-                image = {playlistData.image}
-                followers={playlistData.followers}
+                data={playlistData}
                 personalPlaylist={false}
             />
             
             <TrackListDetails
                 data={playlistData.tracks}
+                personalPlaylist={false}
             />
 
         </div>

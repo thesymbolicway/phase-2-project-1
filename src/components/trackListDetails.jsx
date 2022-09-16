@@ -2,43 +2,77 @@ import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-
+import Button from 'react-bootstrap/Button';
 import { getPlaylists, addTrackToPlaylist } from '../services/backend';
 
-function TrackListDetails({data}) {
+function TrackListDetails({data, personalPlaylist, onDeleteTrack}) {
 
     const [userPlaylists, setUserPlaylists] = useState([])
 
     useEffect(() => {
         getPlaylists().then(setUserPlaylists)
     }, [])
+
+    function renderTitle(data) {
+        if(personalPlaylist) {
+            return data.name
+        }
+        else {
+            console.log(data);
+            return data.track.name
+        }
+    }
     
-    console.log(userPlaylists);
     
-    function renderArtist(artistArr) {
-        return artistArr[0].name
+    function renderArtist(data) {
+        if(personalPlaylist) {
+            console.log(data.artists[0].name);
+            return data.artists[0].name
+        } else {
+            return (data.track.artists[0].name);
+        }
     }
 
-    function renderDuration(duration) {
-        return duration
+    function renderDuration(data) {
+        let duration;
+        if(personalPlaylist) {
+            duration = data.duration_ms
+        } else {
+            duration = data.track.duration_ms;
+        }
+
+        const minutes = Math.floor(duration / 60000);
+        const seconds = ((duration % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds
     }
 
-    function renderAlbum(album) {
-        return album
+    function renderAlbum(data) {
+        if(personalPlaylist) {
+            return data.album.name;
+        } else {
+            return data.track.album.name;
+        }
     }
 
     function onAddToPlaylist(playlistId, trackId) {
         addTrackToPlaylist(playlistId, trackId)
     }
 
-    function renderDropdown(trackId) {
-        return (
-            <DropdownButton onSelect={playlistId => onAddToPlaylist(playlistId, trackId)} id="addToPlaylist" title="Add me to a playlist">
-                {
-                    userPlaylists.map(playlist => <Dropdown.Item eventKey={playlist.id} >{playlist.name}</Dropdown.Item>)
-                }
-            </DropdownButton>
-        )
+    function renderAction(data) {
+        if(personalPlaylist) {
+            return (
+                <Button onClick={() => onDeleteTrack(data.id)} size="sm" variant="secondary">Delete</Button>
+            )
+        }
+        else {
+            return (
+                <DropdownButton onSelect={playlistId => onAddToPlaylist(playlistId, data.track.id)} id="addToPlaylist" title="Add me to a playlist">
+                    {
+                        userPlaylists.map(playlist => <Dropdown.Item eventKey={playlist.id} >{playlist.name}</Dropdown.Item>)
+                    }
+                </DropdownButton>
+            )
+        }
     }
 
     return (
@@ -56,14 +90,13 @@ function TrackListDetails({data}) {
                 <tbody>
                     {
                         data.map(track => {
-                            console.log(track.track);
                             return (
                             <tr>
-                                <td>{track.track.name}</td>
-                                <td>{renderArtist(track.track.artists)}</td>
-                                <td>{renderAlbum(track.track.album.name)}</td>
-                                <td>{renderDuration(track.track.duration_ms)}</td>
-                                <td>{renderDropdown(track.track.id)}</td>
+                                <td>{renderTitle(track)}</td>
+                                <td>{renderArtist(track)}</td>
+                                <td>{renderAlbum(track)}</td>
+                                <td>{renderDuration(track)}</td>
+                                <td>{renderAction(track)}</td>
                             </tr>
                             )
                         })

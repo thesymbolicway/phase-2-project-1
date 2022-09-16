@@ -15,9 +15,13 @@ function PlaylistHeader({ data, onDeletePlaylist, onChange, onUpdatePlaylist, pe
         onUpdatePlaylist()
     };
 
-    function renderDeleteButton() {
+
+
+    function renderEditButton() {
         if(personalPlaylist) {
             return <Button onClick={() => setShow(true)} size="sm" variant="dark">Edit</Button>
+        } else {
+            return null
         }
     }
 
@@ -70,7 +74,7 @@ function PlaylistHeader({ data, onDeletePlaylist, onChange, onUpdatePlaylist, pe
                     <h1>{data.name}</h1>
                     <h6>{data.description}</h6>
                     <p>Followers: {data.followers}</p>
-                    {renderDeleteButton()}
+                    {renderEditButton()}
                 </div>
     
             </div>
